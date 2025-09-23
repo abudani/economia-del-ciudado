@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Economía del Cuidado en México</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- 
+        Palette: Energetic & Playful (#FF6B6B, #FFD166, #06D6A0, #118AB2, #073B4C)
+        Narrative Plan:
+        1. Hook: Show the massive, hidden economic value of care work.
+        2. Problem 1: Highlight the significant gender inequality.
+        3. Problem 2: Show the growing future demand due to demographics.
+        4. Solution: Present the proposed 3-step program model.
+        5. Justification: Compare Care Economy vs. Tech for this specific program goal.
+        6. Vision: Conclude with the tangible impact for Banamex and Mexico.
+        Visualization Choices:
+        - Big Number & Donut Chart (Goal: Inform): To show GDP contribution vs other sectors. Justification: High impact and clear comparison. Method: Chart.js on Canvas. NO SVG.
+        - Bar Chart (Goal: Compare): To show gender disparity in care hours. Justification: Direct, unambiguous comparison. Method: Chart.js on Canvas. NO SVG.
+        - Line Chart (Goal: Change): To show demographic trend of aging population. Justification: Best for showing change over time. Method: Chart.js on Canvas. NO SVG.
+        - Flow Chart (Goal: Organize): To explain the 3-step program. Justification: Visually represents a process. Method: Structured HTML/CSS with Tailwind. NO SVG, NO MERMAID JS.
+        - Comparison Table (Goal: Compare): To argue for Care vs. Tech. Justification: Direct feature comparison. Method: Structured HTML/CSS with Tailwind. NO SVG.
+        - Iconography (Goal: Inform): To summarize the final impact metrics. Justification: Visually engaging summary. Method: Unicode characters with HTML/CSS. NO SVG.
+        Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in this file. All visualizations are rendered using Chart.js on Canvas or structured HTML/CSS with Tailwind.
+    -->
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#073B4C] mb-2">Economía del Cuidado: Oportunidad Estratégica en México</h1>
+            <p class="text-lg text-[#118AB2]">Una justificación en datos para la Fundación Social Banamex</p>
+        </header>
+
+        <main class="space-y-8">
+            
+            <section class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold text-[#073B4C] mb-4">Un Motor Económico Invisible</h2>
+                        <p class="text-gray-600 mb-4">El trabajo de cuidado no remunerado, realizado mayormente en los hogares, representa un valor económico gigantesco, superando a industrias clave del país. Formalizar este sector no es solo justo, es una decisión económica inteligente.</p>
+                        <div class="text-center bg-blue-50 p-6 rounded-lg">
+                            <span class="text-6xl md:text-7xl font-black text-[#118AB2]">27.6%</span>
+                            <p class="text-xl font-bold text-[#073B4C] mt-2">del PIB Nacional</p>
+                            <p class="text-sm text-gray-500">Valor del trabajo de cuidado no remunerado</p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="gdpChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="chart-container md:order-2">
+                        <canvas id="genderGapChart"></canvas>
+                    </div>
+                    <div class="md:order-1">
+                        <h2 class="text-3xl font-bold text-[#073B4C] mb-4">Una Carga Desigual y Feminizada</h2>
+                        <p class="text-gray-600 mb-4">La responsabilidad del cuidado recae desproporcionadamente en las mujeres, limitando sus oportunidades de desarrollo profesional y económico. Un programa enfocado en ellas ataca la raíz de una profunda brecha de desigualdad.</p>
+                         <div class="bg-red-50 p-6 rounded-lg text-center">
+                            <p class="text-xl font-bold text-[#073B4C]">Las mujeres realizan casi</p>
+                            <span class="text-6xl md:text-7xl font-black text-[#FF6B6B]">3 de cada 4</span>
+                            <p class="text-xl font-bold text-[#073B4C]">horas de trabajo de cuidado no remunerado</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold text-[#073B4C] mb-4">El Futuro Llama: Demanda en Auge</h2>
+                        <p class="text-gray-600 mb-4">El envejecimiento de la población mexicana es una realidad. En las próximas décadas, la necesidad de cuidadores profesionales para adultos mayores se disparará, creando un mercado laboral vasto y sostenible. Anticiparse a esta tendencia es clave.</p>
+                        <div class="bg-yellow-50 p-6 rounded-lg text-center">
+                            <p class="text-xl font-bold text-[#073B4C]">Para 2050, 1 de cada 4 mexicanos</p>
+                            <span class="text-6xl md:text-7xl font-black text-[#FFD166]">+60</span>
+                            <p class="text-xl font-bold text-[#073B4C]">años necesitará algún tipo de cuidado</p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="populationChart"></canvas>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="bg-white rounded-lg shadow-md p-6 md:p-8 text-center">
+                 <h2 class="text-3xl font-bold text-[#073B4C] mb-2">La Oportunidad: Un Modelo de Triple Impacto</h2>
+                 <p class="max-w-3xl mx-auto text-gray-600 mb-8">El programa propone una ruta clara para transformar el cuidado en una carrera profesional digna, creando un ecosistema de valor para cuidadores, familias y el sector financiero.</p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="bg-[#EBF8FF] p-6 rounded-lg shadow-sm w-full md:w-1/3 text-center">
+                        <div class="text-4xl mb-2">①</div>
+                        <h3 class="text-xl font-bold text-[#073B4C]">Capacitación y Certificación</h3>
+                        <p class="text-sm text-gray-600">Profesionalizar las habilidades de cuidado con estándares de calidad.</p>
+                    </div>
+                    <div class="text-3xl font-bold text-[#118AB2] hidden md:block">➔</div>
+                     <div class="text-3xl font-bold text-[#118AB2] md:hidden">↓</div>
+                    <div class="bg-[#E6FFFA] p-6 rounded-lg shadow-sm w-full md:w-1/3 text-center">
+                        <div class="text-4xl mb-2">②</div>
+                        <h3 class="text-xl font-bold text-[#073B4C]">Incubación de Cooperativas</h3>
+                        <p class="text-sm text-gray-600">Fomentar modelos de negocio formales y colaborativos.</p>
+                    </div>
+                     <div class="text-3xl font-bold text-[#118AB2] hidden md:block">➔</div>
+                     <div class="text-3xl font-bold text-[#118AB2] md:hidden">↓</div>
+                    <div class="bg-[#FFF5E6] p-6 rounded-lg shadow-sm w-full md:w-1/3 text-center">
+                         <div class="text-4xl mb-2">③</div>
+                        <h3 class="text-xl font-bold text-[#073B4C]">Plataforma Digital y Bancarización</h3>
+                        <p class="text-sm text-gray-600">Conectar con el mercado e integrar servicios financieros.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-[#073B4C] text-center mb-8">¿Por Qué Cuidado y no Tecnología? Un Enfoque Estratégico</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full min-w-max text-left border-collapse">
+                        <thead>
+                            <tr>
+                                <th class="p-4 bg-gray-50 text-gray-600 font-bold border-b-2 border-gray-200">Criterio</th>
+                                <th class="p-4 bg-[#E6FFFA] text-[#073B4C] font-bold border-b-2 border-[#06D6A0] text-center">Economía del Cuidado</th>
+                                <th class="p-4 bg-gray-50 text-gray-600 font-bold border-b-2 border-gray-200 text-center">Tecnología Tradicional</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-200">
+                                <td class="p-4 font-bold">Alineación con Población Objetivo</td>
+                                <td class="p-4 text-center text-3xl font-bold text-[#06D6A0]">✓✓</td>
+                                <td class="p-4 text-center text-3xl font-bold text-gray-400">✓</td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="p-4 font-bold">Barrera de Entrada (Educación)</td>
+                                <td class="p-4 text-center font-bold text-[#06D6A0]">Baja</td>
+                                <td class="p-4 text-center font-bold text-[#FF6B6B]">Alta</td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="p-4 font-bold">Potencial de Formalización Masiva</td>
+                                <td class="p-4 text-center text-3xl font-bold text-[#06D6A0]">✓✓</td>
+                                <td class="p-4 text-center text-3xl font-bold text-gray-400">✓</td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="p-4 font-bold">Impacto Directo en Brecha de Género</td>
+                                <td class="p-4 text-center text-3xl font-bold text-[#06D6A0]">✓✓✓</td>
+                                <td class="p-4 text-center text-3xl font-bold text-gray-400">✓</td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="p-4 font-bold">Resiliencia a la Automatización</td>
+                                <td class="p-4 text-center font-bold text-[#06D6A0]">Alta</td>
+                                <td class="p-4 text-center font-bold text-[#FFD166]">Media</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-bold">Liderazgo y Diferenciación para Banamex</td>
+                                <td class="p-4 text-center text-xl font-bold text-[#06D6A0]">Pionero en Sector Emergente</td>
+                                <td class="p-4 text-center text-xl text-gray-600">Sector Competido</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                 <p class="text-center text-sm text-gray-500 mt-4">La Economía del Cuidado ofrece un camino más inclusivo y de mayor impacto social directo para la población objetivo, posicionando a Banamex en un nicho estratégico y de futuro.</p>
+            </section>
+            
+            <footer class="bg-[#073B4C] text-white rounded-lg shadow-md p-8 text-center">
+                <h2 class="text-3xl font-bold mb-4">Visión de Impacto: Un Futuro Inclusivo</h2>
+                <p class="max-w-3xl mx-auto mb-8">Invertir en la Economía del Cuidado es invertir en la resiliencia de las familias, la formalización del empleo y el liderazgo de Banamex en la innovación social y financiera.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                    <div>
+                        <span class="text-5xl">👩‍🎓</span>
+                        <p class="text-2xl font-bold mt-2">Miles de Cuidadores</p>
+                        <p>Certificados y con empleo formal.</p>
+                    </div>
+                    <div>
+                        <span class="text-5xl">👨‍👩‍👧‍👦</span>
+                        <p class="text-2xl font-bold mt-2">Familias Fortalecidas</p>
+                        <p>Con acceso a servicios de calidad y confianza.</p>
+                    </div>
+                    <div>
+                        <span class="text-5xl">🏦</span>
+                        <p class="text-2xl font-bold mt-2">Banamex Líder</p>
+                        <p>Pionero en un sector económico de alto potencial.</p>
+                    </div>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const FONT_COLOR = '#073B4C';
+            const GRID_COLOR = '#D1D5DB';
+            const COLORS = {
+                blue: '#118AB2',
+                green: '#06D6A0',
+                yellow: '#FFD166',
+                red: '#FF6B6B',
+                navy: '#073B4C'
+            };
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+
+            const defaultOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: FONT_COLOR,
+                            font: {
+                                family: "'Inter', sans-serif"
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                           title: tooltipTitleCallback
+                        },
+                        titleFont: {
+                            family: "'Inter', sans-serif"
+                        },
+                        bodyFont: {
+                             family: "'Inter', sans-serif"
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: FONT_COLOR,
+                             font: {
+                                family: "'Inter', sans-serif"
+                            }
+                        },
+                        grid: {
+                            color: GRID_COLOR
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: FONT_COLOR,
+                             font: {
+                                family: "'Inter', sans-serif"
+                            }
+                        },
+                        grid: {
+                            color: GRID_COLOR
+                        }
+                    }
+                }
+            };
+
+            if (document.getElementById('gdpChart')) {
+                new Chart(document.getElementById('gdpChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Economía del Cuidado', 'Comercio', 'Industrias Manufactureras', 'Otros'],
+                        datasets: [{
+                            label: 'Valor Económico (% del PIB)',
+                            data: [27.6, 19.3, 18.1, 35],
+                            backgroundColor: [COLORS.red, COLORS.blue, COLORS.yellow, '#D1D5DB'],
+                            borderColor: '#FFFFFF',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        ...defaultOptions,
+                        plugins: {
+                            ...defaultOptions.plugins,
+                            title: {
+                                display: true,
+                                text: 'Comparativa del Valor Económico vs Industrias Clave',
+                                color: FONT_COLOR,
+                                font: { size: 16, family: "'Inter', sans-serif" }
+                            },
+                             legend: {
+                                position: 'top',
+                                labels: {
+                                    color: FONT_COLOR,
+                                    font: { family: "'Inter', sans-serif"}
+                                }
+                            }
+                        },
+                        scales: { x: { display: false }, y: { display: false } }
+                    }
+                });
+            }
+
+            if (document.getElementById('genderGapChart')) {
+                new Chart(document.getElementById('genderGapChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Mujeres', 'Hombres'],
+                        datasets: [{
+                            label: 'Horas de Cuidado No Remunerado (%)',
+                            data: [73.3, 26.7],
+                            backgroundColor: [COLORS.red, COLORS.blue],
+                            borderColor: [COLORS.red, COLORS.blue],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                       ...defaultOptions,
+                        indexAxis: 'y',
+                         plugins: {
+                            ...defaultOptions.plugins,
+                            title: {
+                                display: true,
+                                text: '% de Horas de Cuidado No Remunerado por Género',
+                                color: FONT_COLOR,
+                                font: { size: 16, family: "'Inter', sans-serif" }
+                            },
+                             legend: { display: false }
+                        },
+                         scales: {
+                            x: {
+                                ...defaultOptions.scales.x,
+                                max: 100,
+                                ticks: {
+                                    ...defaultOptions.scales.x.ticks,
+                                    callback: function(value) { return value + "%" }
+                                }
+                            },
+                             y: { ...defaultOptions.scales.y, grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            if (document.getElementById('populationChart')) {
+                new Chart(document.getElementById('populationChart'), {
+                    type: 'line',
+                    data: {
+                        labels: ['2020', '2030', '2040', '2050'],
+                        datasets: [{
+                            label: '% de Población >60 años',
+                            data: [12, 16.5, 21, 25],
+                            fill: true,
+                            backgroundColor: 'rgba(255, 209, 102, 0.2)',
+                            borderColor: COLORS.yellow,
+                            tension: 0.1,
+                            pointBackgroundColor: COLORS.yellow,
+                            pointRadius: 5
+                        }]
+                    },
+                    options: {
+                        ...defaultOptions,
+                        plugins: {
+                             ...defaultOptions.plugins,
+                            title: {
+                                display: true,
+                                text: 'Proyección del Envejecimiento Poblacional en México',
+                                color: FONT_COLOR,
+                                font: { size: 16, family: "'Inter', sans-serif" }
+                            },
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: {
+                               ...defaultOptions.scales.y,
+                                ticks: {
+                                   ...defaultOptions.scales.y.ticks,
+                                    callback: function(value) { return value + "%" }
+                                }
+                            },
+                            x: { ...defaultOptions.scales.x, grid: { display: false } }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
